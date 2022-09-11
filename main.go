@@ -66,7 +66,7 @@ func create_message(totalSeconds int) string {
 }
 func send_message(bot *tgbotapi.BotAPI, data []Message) {
 
-	totalSeconds := (13-time.Now().Day())*86400 - (time.Now().Hour()+3)*3600 - (time.Now().Minute()+30)*60 - time.Now().Second()
+	totalSeconds := (13-time.Now().UTC().Day())*86400 - (time.Now().UTC().Hour()+4)*3600 - (time.Now().UTC().Minute()+30)*60 - time.Now().Second()
 
 	for {
 		if totalSeconds > 0 {
