@@ -66,17 +66,14 @@ func create_message(totalSeconds int) string {
 }
 func send_message(bot *tgbotapi.BotAPI, data []Message) {
 
-	totalSeconds := (13-time.Now().UTC().Day())*86400 - (time.Now().UTC().Hour()+4)*3600 - (time.Now().UTC().Minute()+30)*60 - time.Now().Second()
-
 	for {
+		totalSeconds := (13-time.Now().UTC().Day())*86400 - (time.Now().UTC().Hour()+4)*3600 - (time.Now().UTC().Minute()+30)*60 - time.Now().Second()
 		if totalSeconds > 0 {
 			for i := 0; i < len(data); i++ {
 				msg := tgbotapi.NewEditMessageCaption(data[i].chat, data[i].id, create_message(totalSeconds))
 				bot.Send(msg)
 			}
 			time.Sleep(time.Minute)
-			totalSeconds -= 60
-
 		} else {
 			break
 		}
